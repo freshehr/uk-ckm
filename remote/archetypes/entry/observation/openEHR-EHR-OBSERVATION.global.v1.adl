@@ -8,9 +8,9 @@ language
 description
 	original_author = <
 		["name"] = <"Heather Leslie">
-		["organisation"] = <"Ocean Informatics">
 		["email"] = <"heather.leslie@oceaninformatics.com">
-		["date"] = <"19/03/2007">
+		["organisation"] = <"Ocean Informatics">
+		["date"] = <"2007-03-19">
 	>
 	details = <
 		["en"] = <
@@ -22,11 +22,10 @@ description
 			copyright = <"copyright (c) 2010 openEHR Foundation">
 		>
 	>
-	lifecycle_state = <"AuthorDraft">
+	lifecycle_state = <"in_development">
 	other_contributors = <"Sam Heard, Ocean Informatics, Australia", "Ian McNicoll, Ocean Informatics, UK">
 	other_details = <
-		["references"] = <"">
-		["MD5-CAM-1.0.1"] = <"7561ACC34EF2B8E37C10B7CEBF1B85F7">
+		["MD5-CAM-1.0.1"] = <"32583BA82984D3AB8FADC08D4585F09D">
 	>
 
 definition
@@ -62,7 +61,8 @@ definition
 															at0121, 	-- Sweaty
 															at0122, 	-- Centrally cyanosed
 															at0123, 	-- Peripherally cyanosed
-															at0124]	-- Mottled
+															at0124, 	-- Mottled
+															at0130]	-- Normal complexion
 														}
 													}
 													DV_TEXT matches {*}
@@ -72,15 +72,9 @@ definition
 									}
 									CLUSTER[at0129] occurrences matches {0..1} matches {	-- Sweating and hydration
 										items cardinality matches {1..*; unordered} matches {
-											allow_archetype CLUSTER[at0128] occurrences matches {0..1} matches {	-- Sweat
+											allow_archetype CLUSTER[at0116] occurrences matches {0..*} matches {	-- Sweating and hydration details
 												include
-													archetype_id/value matches {/openEHR-EHR-CLUSTER\.fluid(-[a-zA-Z0-9_]+)*\.v1/}
-												exclude
 													archetype_id/value matches {/.*/}
-											}
-											allow_archetype CLUSTER[at0116] occurrences matches {0..1} matches {	-- Hydration
-												include
-													archetype_id/value matches {/openEHR-EHR-CLUSTER\.hydration(-[a-zA-Z0-9_]+)*\.v1/}
 											}
 										}
 									}
@@ -223,9 +217,9 @@ definition
 											}
 										}
 									}
-									allow_archetype CLUSTER[at0105] occurrences matches {0..*} matches {	-- Obvious abnormality on inspection
+									allow_archetype CLUSTER[at0105] occurrences matches {0..*} matches {	-- Other detail
 										include
-											archetype_id/value matches {/openEHR-EHR-CLUSTER\.inspection(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.gait(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.issue(-[a-zA-Z0-9_]+)*\.v1/}
+											archetype_id/value matches {/.*/}
 									}
 								}
 							}
@@ -234,9 +228,17 @@ definition
 				}
 			}
 		}
+		protocol matches {
+			ITEM_TREE[at0131] matches {	-- Tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0132] occurrences matches {0..*} matches {	-- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
 	}
-
-
 
 ontology
 	term_definitions = <
@@ -439,7 +441,7 @@ ontology
 					description = <"Description of readily apparent mood disturbance.">
 				>
 				["at0105"] = <
-					text = <"Obvious abnormality on inspection">
+					text = <"Other detail">
 					description = <"Details of other obvious abnormalities by simple inspection.">
 				>
 				["at0111"] = <
@@ -447,8 +449,8 @@ ontology
 					description = <"Subject appears pale.">
 				>
 				["at0116"] = <
-					text = <"Hydration">
-					description = <"Details of skin hydration.">
+					text = <"Sweating and hydration details">
+					description = <"Details of sweating and skin hydration.">
 				>
 				["at0118"] = <
 					text = <"Flushed">
@@ -490,13 +492,22 @@ ontology
 					text = <"Smells of ketones">
 					description = <"The subject smells of ketones.">
 				>
-				["at0128"] = <
-					text = <"Sweat">
-					description = <"Detailed findings related to sweat.">
-				>
 				["at0129"] = <
 					text = <"Sweating and hydration">
 					description = <"Findings related to sweating and hydration.">
+				>
+				["at0130"] = <
+					text = <"Normal complexion">
+					description = <"The patient's skin has a normal appearance.">
+				>
+				["at0131"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0132"] = <
+					text = <"Extension">
+					description = <"Additional information required to capture local content or to align with other reference models/formalisms.">
+					comment = <"For example: local information requirements or additional metadata to align with FHIR or CIMI equivalents.">
 				>
 			>
 		>

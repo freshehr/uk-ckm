@@ -29,7 +29,7 @@ It should not be used to record 'absence' statements such as \"No information av
 			copyright = <"© Clinical Models UK">
 		>
 	>
-	lifecycle_state = <"Published">
+	lifecycle_state = <"NotSet">
 	other_contributors = <"Steve Bentley, HSCIC, United Kingdom", "Colin Brown, SCIMP, United Kingdom", "Rachel Clements, Cegedim Rx Ltd, United Kingdom", "Richard Cottrell, NHS Ayrshire and Arran, United Kingdom", "Leo Fogarty, GP2GP project, NHS England", "Gurminder Khamba, NHS CFH, United Kingdom", "Heather Leslie, Ocean Informatics, Australia", "Dawn MacDermid, United Kingdom", "Ian McNicoll, Ocean Informatics, United Kingdom (Editor)", "Barry Melia, NHS Lothian, United Kingdom", "Paul Miller, SCIMP, United Kingdom (Editor)", "Sam Patel, NHS Lanarkshire, United Kingdom", "Mike Robinson, INPS, United Kingdom", "Laura Sato, Health and Social Care Information Centre, United Kingdom", "Ian Thompson, SCIMP, United Kingdom (Editor)", "John Thomson, NHS Grampian, United Kingdom", "John Williams, GP2GP, United Kingdom (Editor)">
 	other_details = <
 		["references"] = <"NHS Scotland SCI-XML schema http://www.sci.scot.nhs.uk/products/gateway/gate_down_xml.htm
@@ -41,7 +41,7 @@ openEHR draft 'Adverse Reaction' archetype http://www.openehr.org/ckm/#showArche
 ISB England, Representation in Electronic Patient Records of Allergic Reactions, Adverse Reactions, and Intolerance of Pharmaceutical Products http://www.isb.nhs.uk/documents/isb-1582/amd-24-2011/1582242011npfitepdb.pdf
 RCP London, Standards for the clinical structure and content of patient records, http://www.rcplondon.ac.uk/sites/default/files/standards-for-the-clinical-structure-and-content-of-patient-records.pdf
 RCP London, Standards for core clinical information, http://www.rcplondon.ac.uk/sites/default/files/core_clinical_headings_for_electronic_health_records_v1.4.pdf">
-		["MD5-CAM-1.0.1"] = <"7B4C23C53B0DB170B8D24F1888FA2A97">
+		["MD5-CAM-1.0.1"] = <"AA2C553C096A618CD7A055EC599CB7A7">
 	>
 
 definition
@@ -64,6 +64,7 @@ definition
 									DV_CODED_TEXT matches {
 										defining_code matches {[ac0001]}		-- Clinical Finding
 									}
+									DV_TEXT matches {*}
 								}
 							}
 							ELEMENT[at0021] occurrences matches {0..1} matches {	-- Date recorded
@@ -120,7 +121,6 @@ definition
 		}
 	}
 
-
 ontology
 	terminologies_available = <"SNOMED", "SNOMED-CT">
 	term_definitions = <
@@ -135,8 +135,6 @@ ontology
 					description = <"@ internal @">
 				>
 				["at0002"] = <
-					text = <"Causative agent">
-					description = <"Details of the agent or medicinal substance believed to be the cause of the adverse reaction or allergy.">
 					comment = <"For GP2GP V2 use, it is currently anticipated that there will be 4 permissible ways to express a Causative agent: 
 Drug Group (SNOMED-CT),
 dm+d VMP/AMP (dm+d), 
@@ -145,20 +143,22 @@ Ingredient (SNOMED-CT),
  It is MANDATORY that one and only one of these must always be selected. Optionally, in addition a SNOMED AllergyCode may be sent as a mapping, but can never be sent on its own. 
 For legacy use other codes are permissible such as FDB Agent codes, EMIS Drug codes and READ codes but these should be carried as simple free text and the coded information carried in mappings/translation attributes. This kind of coding is not regarded as being safe to trigger decision support outwith the native GP system.
 The exact subset definitions have not yet been agreed and may change prior to full implementation.">
+					text = <"Causative agent">
+					description = <"Details of the agent or medicinal substance believed to be the cause of the adverse reaction or allergy.">
 				>
 				["at0003"] = <
+					comment = <"This item has a Translation Set between Read Codes (V2 or CTV3) and Snomed Codes to ensure forwards and backwards compatibility.">
 					text = <"Certainty">
 					description = <"The certainty with which the reaction is deemed to be be due to allergy to the agent.">
-					comment = <"This item has a Translation Set between Read Codes (V2 or CTV3) and Snomed Codes to ensure forwards and backwards compatibility.">
 				>
 				["at0004"] = <
 					text = <"Reaction">
 					description = <"An optional pre-coordinated unqualified SNOMED-CT code for the nature of the reaction produced by the  drug allergy.">
 				>
 				["at0005"] = <
+					comment = <"This item has a Translation Set = Read Code (V2 or CTV3) and Snomed Code to ensure forwards and backwards compatability.">
 					text = <"Severity">
 					description = <"The severity of the reaction.">
-					comment = <"This item has a Translation Set = Read Code (V2 or CTV3) and Snomed Code to ensure forwards and backwards compatability.">
 				>
 				["at0009"] = <
 					text = <"Mild">
@@ -193,14 +193,14 @@ The exact subset definitions have not yet been agreed and may change prior to fu
 					description = <"The agent is thought to be certain to have caused the reaction but this has not been confirmed by challenge testing.">
 				>
 				["at0021"] = <
+					comment = <"From Welsh IHR / openHR model.">
 					text = <"Date recorded">
 					description = <"The date that the reaction was clinically recorded/asserted. This will  often equate to the date of onset of the reaction but this may not be wholly clear from source data.">
-					comment = <"From Welsh IHR / openHR model.">
 				>
 				["at0022"] = <
+					comment = <"From Welsh IHR model">
 					text = <"Comment">
 					description = <"Any additional comment or clarification about the adverse reaction.">
-					comment = <"From Welsh IHR model">
 				>
 				["at0023"] = <
 					text = <"Tree">

@@ -8,8 +8,8 @@ language
 description
 	original_author = <
 		["name"] = <"Ian McNicoll">
-		["organisation"] = <"Ocean Informatics UK">
 		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+		["organisation"] = <"Ocean Informatics UK">
 		["date"] = <"2013-06-02">
 	>
 	details = <
@@ -24,12 +24,12 @@ Not to be used for children/teens under the age of 16 years or in pregnancy.">
 			copyright = <"© Clinical Models UK">
 		>
 	>
-	lifecycle_state = <"AuthorDraft">
+	lifecycle_state = <"NotSet">
 	other_contributors = <"Heather Leslie, Ocean Informatics, Australia", ...>
 	other_details = <
-		["current_contact"] = <"Ian McNicoll, Ocean Informatics UK, ian.mcnicoll@oceaninformatics.com">
 		["references"] = <"PEWS Charts, NHS Institute for Innovation and Improvement. Available from http://www.institute.nhs.uk/safer_care/paediatric_safer_care/pews_charts.html, Last accessed 22 Apr 2015">
-		["MD5-CAM-1.0.1"] = <"77EF9D60020502FB3BA274A150025CED">
+		["current_contact"] = <"Ian McNicoll, Ocean Informatics UK, ian.mcnicoll@oceaninformatics.com">
+		["MD5-CAM-1.0.1"] = <"D4BA0F20BC77BFBD9EC25D24C28EC755">
 	>
 
 definition
@@ -57,7 +57,9 @@ definition
 									}
 									ELEMENT[at0050] occurrences matches {0..1} matches {	-- Respiratory
 										value matches {
-											DV_COUNT matches {*}
+											DV_COUNT matches {
+												magnitude matches {|0..3|}
+											}
 										}
 									}
 									ELEMENT[at0051] occurrences matches {0..1} matches {	-- Regular nebilisation
@@ -87,7 +89,6 @@ definition
 			}
 		}
 	}
-
 
 ontology
 	term_definitions = <

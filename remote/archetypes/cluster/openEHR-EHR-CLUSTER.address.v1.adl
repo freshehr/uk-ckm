@@ -6,6 +6,12 @@ concept
 language
 	original_language = <[ISO_639-1::en]>
 	translations = <
+		["ar-sy"] = <
+			language = <[ISO_639-1::ar-sy]>
+			author = <
+				["name"] = <"Mona Saleh">
+			>
+		>
 		["de"] = <
 			language = <[ISO_639-1::de]>
 			author = <
@@ -28,12 +34,6 @@ language
 			author = <
 				["name"] = <"Alan March">
 				["organisation"] = <"Hospital Universitario Austral, Pilar, Buenos Aires, Argentina">
-			>
-		>
-		["ar-sy"] = <
-			language = <[ISO_639-1::ar-sy]>
-			author = <
-				["name"] = <"Mona Saleh">
 			>
 		>
 	>
@@ -85,7 +85,7 @@ description
 			copyright = <"© openEHR Foundation">
 		>
 	>
-	lifecycle_state = <"Initial">
+	lifecycle_state = <"NotSet">
 	other_contributors = <>
 	other_details = <
 		["references"] = <"From NHS Scotland SCI-XML messaging standards http://www.isdscotland.org/isd/files/general-v2-7.xsd NHS Scotland Interoperability Working Group http://www.isdscotland.org/isd/5194.htm originally based on: Postal address of person.  ENV 13606 - 4:2000 7.11.13">
@@ -152,8 +152,6 @@ definition
 			}
 		}
 	}
-
-
 
 ontology
 	term_definitions = <
